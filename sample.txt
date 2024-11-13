@@ -1,1 +1,1 @@
- this is to know about git clone 
+We have created the branch in ui and editing txt file via github UI
