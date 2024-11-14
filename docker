@@ -1,0 +1,8 @@
+sudo yum install docker -y
+  sudo yum update docker -y
+  mkdir newfile
+  touch sample.txt
+  systemctl start docker
+  systemctl enable docker
+  systemctl status docker
+  
