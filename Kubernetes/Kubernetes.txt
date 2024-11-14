@@ -1,0 +1,6 @@
+THIS IS TO TEST ABOUT KUBERNETES
+
+This section lists the different ways to set up and run Kubernetes. When you install Kubernetes, choose an installation type based on: ease of maintenance, security, 
+control,available resources, and expertise required to operate and manage a cluster.
+
+You can download Kubernetes to deploy a Kubernetes cluster on a local machine, into the cloud, or for your own datacenter.
