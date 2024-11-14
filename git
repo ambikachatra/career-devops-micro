@@ -1,0 +1,6 @@
+sudo yum install git -y
+mkdir test
+ls
+cd test
+git
+git --version
