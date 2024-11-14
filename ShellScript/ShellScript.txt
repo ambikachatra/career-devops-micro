@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "
+the user is: $USER
+the current directory of $USER user is : $PWD
+the current date is $cdate
+"
