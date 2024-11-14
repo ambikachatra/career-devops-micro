@@ -1,0 +1,9 @@
+sudo yum install terraform
+sudo yum update terraform
+mkidr simple
+touch test.txt
+vim test.txt
+cat test.txt
+systemctl start terraform
+systemctl enable terraform
+systemctl status terraform
