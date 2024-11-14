@@ -1,0 +1,4 @@
+sudo yum install kudarnetes
+sudo update kubarnets
+systemctl start kubarnets
+systemctl status kubarnets
