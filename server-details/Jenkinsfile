@@ -5,7 +5,7 @@ pipeline {
         stage('Build system details'){
             steps{
                 sh ''' 
-                echo "system details-1st stage'
+                echo "system details-1st stage"
                 uname -a
                 '''
             }
