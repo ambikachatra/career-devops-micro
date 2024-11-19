@@ -5,14 +5,13 @@ pipeline{
             steps{
                 git branch: 'jenkins',  url: 'https://github.com/ManojKRISHNAPPA/career-devops-micro.git'
             }
+        }
+        
         stage('Build'){
             steps{
                 echo "Building the webooks.sh file"
                 sh './webhook.sh'
             }
         }
-
-        }
     }
-
 }
