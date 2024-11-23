@@ -1,5 +1,8 @@
 # career-devops-micro
 # This is GITHUB class
-sh ```
-    this is to test
-```
+# this is to know about git clone 
+
+    
+this is github class
+this is new branch
+crrated and editing in ui 
