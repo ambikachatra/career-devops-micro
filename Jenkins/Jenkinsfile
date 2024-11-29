@@ -31,7 +31,7 @@ pipeline {
         stage('Approval') {
             steps {
                 script {
-                    def plan = readFile 'terraform/tfplan.txt'
+                    def plan = readFile 's3bucket/tfplan.txt'
                     input message: "Do you want to proceed with the Terraform action?",
                           parameters: [
                               text(name: 'Plan', description: 'Please review the code/plan once', defaultValue: plan)
