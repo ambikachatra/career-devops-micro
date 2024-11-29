@@ -20,7 +20,7 @@ pipeline {
         stage('Plan') {
             steps {
                 sh ''' 
-                    cd terraform
+                    cd s3bucket
                     terraform init
                     terraform plan -out=tfplan
                     terraform show -no-color tfplan > tfplan.txt
@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                     // Make sure you're in the right directory
-                    dir('terraform') {
+                    dir('s3bucket') {
                         if (params.terraformAction == 'apply') {
                             sh 'terraform apply -input=false tfplan'
                         } else if (params.terraformAction == 'destroy') {
