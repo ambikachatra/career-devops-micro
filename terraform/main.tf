@@ -19,6 +19,6 @@ resource "aws_instance" "instance-2" {
     security_groups = ["default"]
     key_name = "project"
     tags = {
-        Name = "Node-expo"
+        Name = "Node-exporter"
     }
 }
