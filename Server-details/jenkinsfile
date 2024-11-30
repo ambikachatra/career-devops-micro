@@ -1,0 +1,42 @@
+pipeline{
+    agent any
+        stages {
+            stage ('Build system details'){
+                steps{
+                    sh '''
+                    echo "system details"
+                    uname -a
+                    '''
+                }
+            }
+
+            stage ('Memero -details '){
+
+                steps{
+                    sh '''
+                    echo "memory deatails"
+                    free -h
+                    '''
+                }
+
+                
+
+            }
+
+            stage ('CPU deatails'){
+                steps{
+                    sh '''
+                    echo "CPU details"
+                    lscpu
+                    '''
+                }
+            }
+
+            stage ('Current date'){
+                sh '''
+                echo "Current date is
+                date
+                '''
+            }
+        }
+}
