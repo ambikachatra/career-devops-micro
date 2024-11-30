@@ -35,7 +35,7 @@ pipeline{
             stage ('Current date'){
                 steps{
                     sh '''
-                echo "Current date is
+                echo "Current date is"
                 date
                 '''
                 }
