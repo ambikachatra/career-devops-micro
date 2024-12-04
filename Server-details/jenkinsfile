@@ -40,5 +40,13 @@ pipeline{
                 '''
                 }
             }
+            stage ('disk space'){
+                steps {
+                    sh '''
+                        echo "current disk space is "
+                    df -kh
+                    '''
+                    }
+            }
         }
 }
