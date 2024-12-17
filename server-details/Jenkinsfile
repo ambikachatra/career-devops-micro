@@ -6,25 +6,24 @@ pipeline{
             steps{
                 
                 sh '''
-                echo 'System details - 1 stage
+                echo "System details - 1 stage"
                 uname -a
                 '''
-            }
-            
+            }    
         }
         stage('Memory details'){
             steps{
                 sh '''
-                    echo "Printing memory details"
-                    free -h
+                echo "Printing memory details"
+                free -h
                 '''
             }
         }
         stage('Cpu details'){
             steps{
                 sh '''
-                    echo "Cpu details"
-                    lscpu
+                echo "Cpu details"
+                lscpu
                 '''
             }
         }
