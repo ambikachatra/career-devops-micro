@@ -1,0 +1,32 @@
+pipeline{
+    agent any
+
+    stages{
+        stage('Build system details'){
+            steps{
+                
+                sh '''
+                echo 'System details - 1 stage
+                uname -a
+                '''
+            }
+            
+        }
+        stage('Memory details'){
+            steps{
+                sh '''
+                    echo "Printing memory details"
+                    free -h
+                '''
+            }
+        }
+        stage('Cpu details'){
+            steps{
+                sh '''
+                    echo "Cpu details"
+                    lscpu
+                '''
+            }
+        }
+    }
+}
