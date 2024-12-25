@@ -45,15 +45,14 @@ pipeline {
                 script {
                     dir('terraform') {
                         if (params.TerraformAction == 'apply') {
-                            sh '''
-                                pwd
-                                terraform apply -input=false tfplan
-                            '''
+                            
+                                
+                             sh 'terraform apply -input=false tfplan'
+                            
                         } else if (params.TerraformAction == 'destroy') {
-                            sh '''
-                                pwd
-                                terraform destroy -auto-approve
-                            '''
+                            
+                              sh  'terraform destroy -auto-approve'
+                            
                         }
                     }
                 }
