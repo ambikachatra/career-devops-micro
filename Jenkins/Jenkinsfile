@@ -11,8 +11,7 @@ pipeline {
     stages{
         stage('Git checkout'){
             steps{
-                git branch: 'iac-chatra', url: 'https://github.com/ManojKRISHNAPPA/career-devops-micro.git'
-            }
+                git branch: 'iac-chatra', url: 'https://github.com/ambikachatra/career-devops-micro.git'
         }
         stage('Terraform plan'){
             steps{
