@@ -31,8 +31,10 @@ pipeline {
             steps{
                 script{
                     def plan = readFile 'terraform/tfplan.txt'
-                    input message:  "Do you want to proceed with terraform action.. ?"
-                    parameters: [text{name: 'Plan',description: 'Please review the code/plan once',defaultValue: plan}]
+                    input message:  "Do you want to proceed with terraform action.. ?",
+                        parameters: [
+                            text{name: 'Plan',description: 'Please review the code/plan once',defaultValue: plan}
+                        ]
                 }
             }
         }
@@ -44,10 +46,12 @@ pipeline {
             }
             steps{
                 script{
-                    if (params.TerraformAction == 'apply') {
+                    dir('terraform'){
+                        if (params.TerraformAction == 'apply') {
                         sh "pwd; cd /terraform; terraform apply -input=false tfplan"
                     } else if (params.TerraformAction == 'destroy'){
-                         sh "pwd; cd /terraform; terraform apply"
+                         sh "pwd; cd /terraform; terraform destroy -auto-aprove"
+                    }
                     }
                 }
             }
