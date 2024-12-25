@@ -1,0 +1,56 @@
+pipeline {
+    parameters{
+        choice(name: 'TerraformAction',choices: ['apply','destroy'],description: "Choose your terraform action to be performed" )
+
+    }
+    environment{
+        AWS_ACCESS_KEY_ID = credential('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credential('AWS_SECRET_ACCESS_KEY')
+    }
+    agent any 
+    stages{
+        stage('Git checkout'){
+            steps{
+                git branch: 'iac-chatra', url: 'https://github.com/ManojKRISHNAPPA/career-devops-micro.git'
+            }
+        }
+        stage('Terraform plan'){
+            steps{
+                sh '''
+                    cd terraform 
+                    pwd
+                    terraform init
+                    terraform plan -out tfplan
+                    terraform show -no-colour tfplan > tfplan.txt 
+
+                '''
+            }
+
+        }
+        stage('Approval'){
+            steps{
+                script{
+                    def plan = readFile 'terraform/tfplan.txt'
+                    input message:  "Do you want to proceed with terraform action.. ?"
+                    parameters: [text{name: 'Plan',description: 'Please review the code/plan once',defaultValue: plan}]
+                }
+            }
+        }
+        stage('Creation or destroy stage'){
+            when {
+                expression {
+                    return params.TerraformAction == 'apply' || params.TerraformAction == 'destroy'
+                }
+            }
+            steps{
+                script{
+                    if (params.TerraformAction == 'apply') {
+                        sh "pwd; cd /terraform; terraform apply -input=false tfplan"
+                    } else if (params.TerraformAction == 'destroy'){
+                         sh "pwd; cd /terraform; terraform apply"
+                    }
+                }
+            }
+        }
+    }
+}
