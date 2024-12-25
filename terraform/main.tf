@@ -3,7 +3,7 @@ provider "aws" {
   
 }
 resource "aws_instance" "instance-1" {
-    ami = "ami-0fd05997b4dff7aac"
+    ami = "ami-013b2876e77b2db31"
     instance_type = "t2.micro"
     security_groups = ["default"]
     key_name = "ambika"
@@ -14,7 +14,7 @@ resource "aws_instance" "instance-1" {
 }
 
 resource "aws_instance" "instance-2" {
-    ami = "ami-0fd05997b4dff7aac"
+    ami = "ami-013b2876e77b2db31"
     instance_type = "t2.micro"
     security_groups = ["default"]
     key_name = "ambika"
