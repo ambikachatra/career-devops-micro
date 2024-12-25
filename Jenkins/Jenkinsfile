@@ -1,57 +1,60 @@
 pipeline {
-    parameters{
-        choice(name: 'TerraformAction',choices: ['apply','destroy'],description: "Choose your terraform action to be performed" )
-
+    parameters {
+        choice(name: 'TerraformAction', choices: ['apply', 'destroy'], description: "Choose your terraform action to be performed")
     }
-    environment{
-        AWS_ACCESS_KEY_ID = credential('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credential('AWS_SECRET_ACCESS_KEY')
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID') // Corrected method to 'credentials'
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY') // Corrected method to 'credentials'
     }
     agent any 
-    stages{
-        stage('Git checkout'){
-            steps{
+    stages {
+        stage('Git Checkout') {
+            steps {
                 git branch: 'iac-chatra', url: 'https://github.com/ambikachatra/career-devops-micro.git'
+            }
         }
-        }
-        stage('Terraform plan'){
-            steps{
+        stage('Terraform Plan') {
+            steps {
                 sh '''
                     cd terraform 
                     pwd
                     terraform init
-                    terraform plan -out tfplan
-                    terraform show -no-colour tfplan > tfplan.txt 
-
+                    terraform plan -out=tfplan
+                    terraform show -no-color tfplan > tfplan.txt
                 '''
             }
-
         }
-        stage('Approval'){
-            steps{
-                script{
-                    def plan = readFile 'terraform/tfplan.txt'
-                    input message:  "Do you want to proceed with terraform action.. ?",
+        stage('Approval') {
+            steps {
+                script {
+                    def plan = readFile('terraform/tfplan.txt') // Ensure the file exists
+                    input message: "Do you want to proceed with the Terraform action?",
                         parameters: [
-                            text(name: 'Plan',description: 'Please review the code/plan once',defaultValue: plan)
+                            text(name: 'Plan', description: 'Please review the code/plan once', defaultValue: plan)
                         ]
                 }
             }
         }
-        stage('Creation or destroy stage'){
+        stage('Creation or Destroy Stage') {
             when {
                 expression {
                     return params.TerraformAction == 'apply' || params.TerraformAction == 'destroy'
                 }
             }
-            steps{
-                script{
-                    dir('terraform'){
+            steps {
+                script {
+                    dir('terraform') {
                         if (params.TerraformAction == 'apply') {
-                        sh "pwd; cd /terraform; terraform apply -input=false tfplan"
-                    } else if (params.TerraformAction == 'destroy'){
-                         sh "pwd; cd /terraform; terraform destroy -auto-aprove"
-                    }
+                            sh '''
+                                pwd
+                                terraform apply -input=false tfplan
+                            '''
+                        } else if (params.TerraformAction == 'destroy') {
+                            sh '''
+                                pwd
+                                terraform destroy -auto-approve
+                            '''
+                        }
                     }
                 }
             }
