@@ -13,6 +13,7 @@ pipeline {
             steps{
                 git branch: 'iac-chatra', url: 'https://github.com/ambikachatra/career-devops-micro.git'
         }
+        }
         stage('Terraform plan'){
             steps{
                 sh '''
@@ -32,7 +33,7 @@ pipeline {
                     def plan = readFile 'terraform/tfplan.txt'
                     input message:  "Do you want to proceed with terraform action.. ?",
                         parameters: [
-                            text{name: 'Plan',description: 'Please review the code/plan once',defaultValue: plan}
+                            text(name: 'Plan',description: 'Please review the code/plan once',defaultValue: plan)
                         ]
                 }
             }
@@ -56,5 +57,4 @@ pipeline {
             }
         }
     }
-}
 }
