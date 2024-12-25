@@ -24,6 +24,6 @@ resource "aws_instance" "instance-2" {
     }
 }
 resource "aws_key_pair" "my_key_pair" {
-  key_name   = var.key_name
+  key_name   = "root"
   public_key = file("${abspath(path.cwd)}/id_rsa_pub")
 }
