@@ -1,23 +1,23 @@
 pipeline {
     agent any
     stages{
-        steps('Cpu details'){
-            step{
+        stage('Cpu details'){
+            steps{
                 sh '''
                     echo "Building cpu details"
                     lscpu
                 '''
             }
         }
-        steps('Build system details'){
-            step{
+        stage('Build system details'){
+            steps{
                 sh '''
                     echo "System details 1-stage"
                     uname -a
                 '''
             }
         }
-        steps('Memory details'){
+        stage('Memory details'){
             step{
                 sh '''
                     echo "Printing memory details"
@@ -26,8 +26,8 @@ pipeline {
                 '''
             }
         }
-        steps('Current date'){
-            step{
+        stage('Current date'){
+            steps{
                 sh '''
                     echo "Printing current date"
                     date
