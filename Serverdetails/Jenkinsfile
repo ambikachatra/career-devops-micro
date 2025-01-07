@@ -18,7 +18,7 @@ pipeline {
             }
         }
         stage('Memory details'){
-            step{
+            steps{
                 sh '''
                     echo "Printing memory details"
                     free -h
