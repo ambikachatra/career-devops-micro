@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    stages{
+        steps('Cpu details'){
+            step{
+                sh '''
+                    echo "Building cpu details"
+                    lscpu
+                '''
+            }
+        }
+        steps('Build system details'){
+            step{
+                sh '''
+                    echo "System details 1-stage"
+                    uname -a
+                '''
+            }
+        }
+        steps('Memory details'){
+            step{
+                sh '''
+                    echo "Printing memory details"
+                    free -h
+
+                '''
+            }
+        }
+        steps('Current date'){
+            step{
+                sh '''
+                    echo "Printing current date"
+                    date
+
+                '''
+            }
+        }
+    }
+}
